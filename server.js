@@ -35,7 +35,7 @@ app.post('/register', async (req, res) => {
         });
 
         await newUser.save(); // Use await to handle the save operation
-        res.redirect('/login');
+        res.send('Account Created');
     } catch (err) {
         console.log(err);
         if (err.code === 11000) { // Duplicate username error
