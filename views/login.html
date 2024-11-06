@@ -3,98 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login & Register</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
+        /* General Styles */
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #f0f4f7;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
             margin: 0;
             padding: 0;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             height: 100vh;
-            color: #333;
+            color: #fff;
+            text-align: center;
         }
 
         h2 {
-            margin-bottom: 20px;
-            color: #2C3E50;
+            margin-bottom: 30px;
+            color: #fff;
+            font-size: 32px;
+            font-weight: 600;
         }
 
+        h3 {
+            margin-top: 20px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        a {
+            color: #fff;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Form Styling */
         form {
             background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 380px;
+            margin: 0 auto;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
         }
 
         label {
-            font-weight: 500;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
         }
 
         input[type="text"],
         input[type="password"] {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
             font-size: 16px;
+            transition: border-color 0.3s ease;
         }
 
         input[type="text"]:focus,
         input[type="password"]:focus {
-            border-color: #007BFF;
+            border-color: #2575fc;
             outline: none;
         }
 
         button {
-            background-color: #007BFF;
+            background-color: #2575fc;
             color: white;
-            padding: 10px;
+            padding: 14px;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 16px;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s ease, transform 0.2s;
         }
 
         button:hover {
-            background-color: #0056b3;
+            background-color: #1a4db8;
+            transform: translateY(-2px);
         }
 
-        h3 {
-            margin-top: 30px;
-            color: #2C3E50;
+        button:active {
+            transform: translateY(2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 400px) {
+            h2 {
+                font-size: 26px;
+            }
+
+            form {
+                padding: 20px;
+            }
+
+            input[type="text"],
+            input[type="password"] {
+                font-size: 14px;
+            }
+
+            button {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 <body>
-    <h2>Login Page</h2>
-    <form action="/login" method="POST">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-        
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        
-        <button type="submit">Login</button>
-    </form>
-    
-    <h3>New User?</h3>
-    <form action="/register" method="POST">
-        <label for="new-username">Username:</label>
-        <input type="text" id="new-username" name="username" required>
-        
-        <label for="new-password">Password:</label>
-        <input type="password" id="new-password" name="password" required>
-        
-        <button type="submit">Register</button>
-    </form>
+
+    <!-- Login Section -->
+    <div>
+        <h2>Login</h2>
+        <form action="/login" method="POST">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required placeholder="Enter your username">
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required placeholder="Enter your password">
+            
+            <button type="submit">Login</button>
+        </form>
+
+        <h3>New User? <a href="#register">Create an account</a></h3>
+    </div>
+
+    <!-- Register Section -->
+    <div id="register" style="display:none;">
+        <h2>Register</h2>
+        <form action="/register" method="POST">
+            <label for="new-username">Username:</label>
+            <input type="text" id="new-username" name="username" required placeholder="Enter a username">
+            
+            <label for="new-password">Password:</label>
+            <input type="password" id="new-password" name="password" required placeholder="Enter a password">
+            
+            <button type="submit">Register</button>
+        </form>
+
+        <h3>Already have an account? <a href="#login">Login</a></h3>
+    </div>
+
+    <script>
+        // Switch between login and register forms
+        document.querySelector('a[href="#register"]').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.querySelector('div').style.display = 'none'; // hide login
+            document.querySelector('#register').style.display = 'block'; // show register
+        });
+
+        document.querySelector('a[href="#login"]').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.querySelector('div').style.display = 'block'; // show login
+            document.querySelector('#register').style.display = 'none'; // hide register
+        });
+    </script>
 </body>
 </html>

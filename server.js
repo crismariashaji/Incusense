@@ -35,7 +35,7 @@ app.post('/register', async (req, res) => {
         });
 
         await newUser.save(); // Use await to handle the save operation
-        res.send('User registered successfully!');
+        res.redirect('/incusense');
     } catch (err) {
         console.log(err);
         if (err.code === 11000) { // Duplicate username error
@@ -70,7 +70,7 @@ app.get('/incusense', (req, res) => {
 // Start server
 mongoose
   .connect(
-    `mongodb+srv://akshay:undr803hy4@aks.9adguzt.mongodb.net/?retryWrites=true&w=majority&appName=aks`
+    `mongodb+srv://cris969701:YGw4gR8UQ0SwdIC5@cluster.pg1kq.mongodb.net/?retryWrites=true&w=majority&appName=cluster`
   )
   .then(() =>
     app.listen(3000, () =>
